@@ -1,4 +1,3 @@
-- Pre-requisite - Get `jq` using `brew install jq`
 - `git clone https://github.com/abhirockzz/ocir-docker-registry-util.git`
 - `cd ocir-docker-registry-util`
 - `chmod +x ocir-get-v2-api-access-token.sh`
