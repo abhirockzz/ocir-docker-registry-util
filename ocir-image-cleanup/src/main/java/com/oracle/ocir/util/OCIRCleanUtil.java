@@ -40,7 +40,7 @@ public class OCIRCleanUtil {
         System.out.println("OCIR Docker V2 endpoint " + OCIR_DOCKERV2_API_ENDPOINT);
 
         String prefixForImagesToBeDeleted = props.getProperty("image_prefix_for_deletion");
-        System.out.println("Prefix for Images to be delted " + prefixForImagesToBeDeleted);
+        System.out.println("Prefix for Images to be deleted " + prefixForImagesToBeDeleted);
 
         String ocirDockerV2APIAccessToken = props.getProperty("ocir_docker_v2_api_access_token");
 
@@ -57,18 +57,14 @@ public class OCIRCleanUtil {
         Repositories reposJ = new Gson().fromJson(repos, Repositories.class);
 
         List<String> tobeDeleted = reposJ.getRepositories().stream()
-                .map((r) -> r.split("/")[1]) //e.g. odx-jafar/abhishek/test-app/my-func:0.0.1
-                .filter((r) -> r.startsWith(prefixForImagesToBeDeleted))
+                //.map((r) -> r.split("/")[1]) //e.g. odx-jafar/abhishek/test-app/my-func:0.0.1
+                .filter((r) -> r.split("/")[1].startsWith(prefixForImagesToBeDeleted))
                 .collect(Collectors.toList());
 
         //System.out.println("Listing images...........");
         if (tobeDeleted.isEmpty()) {
             System.out.println("No repositories to be deleted");
             return;
-        }
-        
-        for (String repo : tobeDeleted) {
-            System.out.println("Repo to be deleted -- "+ repo);
         }
 
         for (String repo : tobeDeleted) {
@@ -89,7 +85,7 @@ public class OCIRCleanUtil {
                     .get(String.class);
 
             RepoTagsList tagsJ = new Gson().fromJson(tags, RepoTagsList.class);
-            System.out.println("Getting tags for repo " + repo);
+            //System.out.println("Getting tags for repo " + repo);
             for (String tag : tagsJ.getTags()) {
                 //System.out.println("Tag " + tag);
                 //System.out.println("Getting manifest for tag " + tag);
