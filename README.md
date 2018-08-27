@@ -2,13 +2,13 @@
 - `cd ocir-docker-registry-util`
 - `chmod +x ocir-get-v2-api-access-token.sh`
 - get access token for invoking OCIR Docker V2 API
-	- edit `ocir-get-v2-api-access-token.sh` to enter details - `registry`, `ocir_username` and `ocir_auth_token`
+	- edit `ocir-get-v2-api-access-token.sh` to enter details - `registry`, `ocir_username` (admin level credentials) and `ocir_auth_token`
 	- `./ocir-get-v2-api-access-token.sh`
 	- save the result and copy it in `util.properties` (next step)
 - `cd ocir-image-cleanup`
 - update `util.properties`
 
-> Please enter the correct region in `ocir_registry` attribute
+> Please enter the correct region in `ocir_registry` attribute, `ocir_username` should be admin level credentials
 
 		ocir_registry=iad.ocir.io
 		image_prefix_for_deletion=e.g. workshop1>
