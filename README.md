@@ -1,3 +1,4 @@
+- Pre-requisite - Get `jq` using `brew install jq`
 - `git clone https://github.com/abhirockzz/ocir-docker-registry-util.git`
 - `cd ocir-docker-registry-util`
 - `mvn clean install`
