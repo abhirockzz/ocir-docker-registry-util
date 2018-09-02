@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.Response;
 
 public class OCIRCleanUtil {
 
@@ -55,8 +54,9 @@ public class OCIRCleanUtil {
         Repos repos = gson.fromJson(reposJSON, Repos.class);
 
         List<String> tobeDeleted = repos.getRepos().stream()
-                .map((r) -> r.getRepoPath()) //e.g. odx-jafar/abhishek/test-app/my-func:0.0.1
-                .filter((r) -> r.split("/")[1].startsWith(prefixForImagesToBeDeleted))
+                .map((r) -> r.getRepoPath()) //e.g. odx-jafar/abhishek/my-func:0.0.1
+                //.filter((r) -> r.split("/")[1].startsWith(prefixForImagesToBeDeleted))
+                .filter(r -> r.substring(r.indexOf("/")+1, r.length()).startsWith(prefixForImagesToBeDeleted))
                 .collect(Collectors.toList());
 
         if (tobeDeleted.isEmpty()) {
